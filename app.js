@@ -29,6 +29,24 @@ document.addEventListener('DOMContentLoaded', () => {
     let isTimerRunning = false;
 
     // ------------------------------------------------------------------
+    // Toast Notification Helper
+    // ------------------------------------------------------------------
+    function showToast(message, icon = '🎉', duration = 4000) {
+        const existing = document.querySelector('.toast');
+        if (existing) existing.remove();
+
+        const toast = document.createElement('div');
+        toast.className = 'toast';
+        toast.innerHTML = `<span class="toast-icon">${icon}</span><span>${message}</span>`;
+        document.body.appendChild(toast);
+
+        setTimeout(() => {
+            toast.classList.add('toast-hide');
+            toast.addEventListener('animationend', () => toast.remove(), { once: true });
+        }, duration);
+    }
+
+    // ------------------------------------------------------------------
     // 2. Tab Navigation System
     // ------------------------------------------------------------------
     const navItems = document.querySelectorAll('.nav-item');
@@ -145,7 +163,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
         document.querySelectorAll('.delete-btn').forEach(btn => {
             btn.addEventListener('click', (e) => {
-                const id = parseInt(e.target.getAttribute('data-id'));
+                // Use currentTarget (the button itself) — not e.target, which
+                // can be the emoji text node inside the button when clicked directly.
+                const id = parseInt(e.currentTarget.getAttribute('data-id'));
                 tasks = tasks.filter(t => t.id !== id);
                 renderTasks();
             });
@@ -183,6 +203,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const dashTimerVal = document.getElementById('dash-timer-val');
     const timerStartBtn = document.getElementById('timer-start-btn');
     const timerResetBtn = document.getElementById('timer-reset-btn');
+    const timerModeLabel = document.getElementById('timer-mode-label');
 
     function updateTimerDisplay() {
         const mins = Math.floor(timerRemaining / 60);
@@ -190,6 +211,13 @@ document.addEventListener('DOMContentLoaded', () => {
         const formatted = `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
         timerDisplay.textContent = formatted;
         dashTimerVal.textContent = formatted;
+    }
+
+    function updateModeLabel(duration) {
+        if (duration === 1500) timerModeLabel.textContent = 'Deep Work Session';
+        else if (duration === 300) timerModeLabel.textContent = 'Short Break';
+        else if (duration === 900) timerModeLabel.textContent = 'Long Break';
+        else timerModeLabel.textContent = 'Focus Session';
     }
 
     timerStartBtn.addEventListener('click', () => {
@@ -212,8 +240,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 } else {
                     clearInterval(timerInterval);
                     isTimerRunning = false;
-                    alert('🎉 Focus Session Complete! Time for a short break.');
+                    showToast('Focus session complete! Time for a short break.', '🎉');
                     timerStartBtn.textContent = 'Start Session ▶';
+                    timerStartBtn.classList.remove('btn-secondary');
+                    timerStartBtn.classList.add('btn-primary');
                 }
             }, 1000);
         }
@@ -226,6 +256,7 @@ document.addEventListener('DOMContentLoaded', () => {
         timerStartBtn.textContent = 'Start Session ▶';
         timerStartBtn.classList.remove('btn-secondary');
         timerStartBtn.classList.add('btn-primary');
+        updateModeLabel(timerDuration);
         updateTimerDisplay();
     });
 
@@ -236,6 +267,9 @@ document.addEventListener('DOMContentLoaded', () => {
             timerDuration = parseInt(btn.getAttribute('data-time'));
             timerRemaining = timerDuration;
             timerStartBtn.textContent = 'Start Session ▶';
+            timerStartBtn.classList.remove('btn-secondary');
+            timerStartBtn.classList.add('btn-primary');
+            updateModeLabel(timerDuration);
             updateTimerDisplay();
         });
     });
@@ -259,14 +293,29 @@ document.addEventListener('DOMContentLoaded', () => {
     const modalCancelBtn = document.getElementById('modal-cancel-btn');
     const modalSaveBtn = document.getElementById('modal-save-btn');
     const modalTaskInput = document.getElementById('modal-task-input');
+    const modalTaskCategory = document.getElementById('modal-task-category');
+
+    // Allow pressing Enter in the modal input to save the task
+    modalTaskInput.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') modalSaveBtn.click();
+    });
+
+    function closeModal() {
+        taskModal.classList.remove('active');
+        modalTaskInput.value = '';
+        modalTaskCategory.value = 'feature';
+    }
 
     btnQuickTask.addEventListener('click', () => {
         taskModal.classList.add('active');
         modalTaskInput.focus();
     });
 
-    modalCancelBtn.addEventListener('click', () => {
-        taskModal.classList.remove('active');
+    modalCancelBtn.addEventListener('click', closeModal);
+
+    // Also close if the user clicks the backdrop itself
+    taskModal.addEventListener('click', (e) => {
+        if (e.target === taskModal) closeModal();
     });
 
     modalSaveBtn.addEventListener('click', () => {
@@ -275,12 +324,12 @@ document.addEventListener('DOMContentLoaded', () => {
             tasks.push({
                 id: Date.now(),
                 text: text,
-                category: 'feature',
+                category: modalTaskCategory.value,
                 completed: false
             });
-            modalTaskInput.value = '';
-            taskModal.classList.remove('active');
+            closeModal();
             renderTasks();
+            showToast('Task added successfully!', '✅', 2500);
         }
     });
 

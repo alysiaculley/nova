@@ -23,7 +23,7 @@ This project was built as part of mastering **AntiGravity IDE**, **Git**, and **
 ### Local Setup
 1. Clone this repository:
    ```bash
-   git clone https://github.com/YOUR_USERNAME/nova.git
+   git clone https://github.com/alysiaculley/nova.git
    ```
 2. Open `index.html` in your web browser or use Live Server in AntiGravity IDE.
 

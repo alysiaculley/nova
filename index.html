@@ -227,6 +227,11 @@ git push -u origin feature/new-widget</code></pre>
         <div class="glass-card modal-content">
             <h3>+ Create Quick Task</h3>
             <input type="text" id="modal-task-input" placeholder="Task title..." class="modal-input">
+            <select id="modal-task-category" class="modal-input" style="cursor: pointer;">
+                <option value="feature">✨ Feature</option>
+                <option value="bug">🐛 Bug Fix</option>
+                <option value="git">🐙 Git / GitHub</option>
+            </select>
             <div class="modal-actions">
                 <button class="btn btn-secondary" id="modal-cancel-btn">Cancel</button>
                 <button class="btn btn-primary" id="modal-save-btn">Save Task</button>
