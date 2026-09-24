@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="NovaSpace - An interactive developer focus dashboard and task studio built with modern web standards.">
+    <title>NovaSpace | Developer Dashboard & Studio</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app-background">
+        <div class="glow-orb orb-1"></div>
+        <div class="glow-orb orb-2"></div>
+        <div class="glow-orb orb-3"></div>
+    </div>
+
+    <div class="app-container">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar" id="main-sidebar">
+            <div class="brand">
+                <div class="brand-icon">🌌</div>
+                <h2>NovaSpace</h2>
+            </div>
+            <nav class="nav-menu">
+                <button class="nav-item active" data-tab="dashboard-tab" id="nav-dashboard">
+                    <span class="icon">⚡</span> Dashboard
+                </button>
+                <button class="nav-item" data-tab="tasks-tab" id="nav-tasks">
+                    <span class="icon">🎯</span> Focus Tasks
+                </button>
+                <button class="nav-item" data-tab="timer-tab" id="nav-timer">
+                    <span class="icon">⏱️</span> Flow Timer
+                </button>
+                <button class="nav-item" data-tab="git-guide-tab" id="nav-git-guide">
+                    <span class="icon">🐙</span> Git & GitHub Guide
+                </button>
+            </nav>
+            <div class="sidebar-footer">
+                <div class="user-badge">
+                    <div class="avatar">DEV</div>
+                    <div class="user-info">
+                        <span class="user-name">Pro Developer</span>
+                        <span class="user-status">Online • AntiGravity IDE</span>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="main-content">
+            <header class="top-header">
+                <div class="header-left">
+                    <h1 id="page-title">Developer Studio Dashboard</h1>
+                    <p class="subtitle" id="page-subtitle">Welcome to your high-performance focus environment</p>
+                </div>
+                <div class="header-right">
+                    <div class="stat-pill">
+                        <span class="pulse-dot"></span>
+                        <span id="streak-counter">3 Day Streak 🔥</span>
+                    </div>
+                    <button class="btn btn-primary" id="btn-quick-task">+ New Task</button>
+                </div>
+            </header>
+
+            <!-- TAB 1: DASHBOARD -->
+            <section class="tab-content active" id="dashboard-tab">
+                <div class="metrics-grid">
+                    <div class="metric-card glass-card">
+                        <div class="card-header">
+                            <span class="card-icon">💻</span>
+                            <span class="badge badge-purple">Git Repo</span>
+                        </div>
+                        <h3 class="metric-value">active</h3>
+                        <p class="metric-label">Version Control Status</p>
+                        <div class="progress-bar"><div class="progress-fill" style="width: 100%;"></div></div>
+                    </div>
+
+                    <div class="metric-card glass-card">
+                        <div class="card-header">
+                            <span class="card-icon">✅</span>
+                            <span class="badge badge-green">Tasks</span>
+                        </div>
+                        <h3 class="metric-value" id="completed-task-count">0 / 0</h3>
+                        <p class="metric-label">Completed Today</p>
+                        <div class="progress-bar"><div class="progress-fill" id="task-progress-fill" style="width: 0%;"></div></div>
+                    </div>
+
+                    <div class="metric-card glass-card">
+                        <div class="card-header">
+                            <span class="card-icon">⏱️</span>
+                            <span class="badge badge-cyan">Flow Time</span>
+                        </div>
+                        <h3 class="metric-value" id="dash-timer-val">25:00</h3>
+                        <p class="metric-label">Focus Session Ready</p>
+                        <div class="progress-bar"><div class="progress-fill" style="width: 75%;"></div></div>
+                    </div>
+                </div>
+
+                <div class="content-grid">
+                    <div class="glass-card main-widget">
+                        <div class="widget-header">
+                            <h3>🚀 Quick Start Focus Tasks</h3>
+                            <span class="badge badge-glass">Live Sync</span>
+                        </div>
+                        <ul class="quick-task-list" id="quick-task-list">
+                            <!-- Populated via JavaScript -->
+                        </ul>
+                    </div>
+
+                    <div class="glass-card side-widget">
+                        <div class="widget-header">
+                            <h3>💡 Pro Developer Tip</h3>
+                        </div>
+                        <div class="tip-body">
+                            <div class="tip-icon">✨</div>
+                            <p id="daily-tip-text">Atomic commits make debugging 10x easier. Small, focused changes are easier to understand and push to GitHub!</p>
+                        </div>
+                        <button class="btn btn-secondary btn-full" id="btn-next-tip">Next Tip 🎲</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- TAB 2: TASKS TAB -->
+            <section class="tab-content" id="tasks-tab">
+                <div class="glass-card section-card">
+                    <div class="widget-header">
+                        <h2>🎯 Task & Feature Management</h2>
+                        <p>Track your project features as you code in AntiGravity IDE</p>
+                    </div>
+                    <form class="task-form" id="add-task-form">
+                        <input type="text" id="task-input" placeholder="e.g. Add dark mode toggle to navigation bar..." required>
+                        <select id="task-category">
+                            <option value="feature">✨ Feature</option>
+                            <option value="bug">🐛 Bug Fix</option>
+                            <option value="git">🐙 Git / GitHub</option>
+                        </select>
+                        <button type="submit" class="btn btn-primary">Add Task</button>
+                    </form>
+
+                    <div class="task-filters">
+                        <button class="filter-btn active" data-filter="all">All Tasks</button>
+                        <button class="filter-btn" data-filter="pending">Pending</button>
+                        <button class="filter-btn" data-filter="completed">Completed</button>
+                    </div>
+
+                    <div class="tasks-container" id="full-task-list">
+                        <!-- Populated by JavaScript -->
+                    </div>
+                </div>
+            </section>
+
+            <!-- TAB 3: TIMER TAB -->
+            <section class="tab-content" id="timer-tab">
+                <div class="glass-card section-card text-center">
+                    <h2>⏱️ Pomodoro & Focus Timer</h2>
+                    <p>Enhance coding productivity with structured focus intervals</p>
+                    
+                    <div class="timer-display-container">
+                        <div class="timer-circle">
+                            <span class="timer-digits" id="timer-display">25:00</span>
+                            <span class="timer-mode" id="timer-mode-label">Deep Work Session</span>
+                        </div>
+                    </div>
+
+                    <div class="timer-controls">
+                        <button class="btn btn-primary btn-lg" id="timer-start-btn">Start Session ▶</button>
+                        <button class="btn btn-secondary btn-lg" id="timer-reset-btn">Reset 🔄</button>
+                    </div>
+
+                    <div class="timer-presets">
+                        <button class="btn btn-glass" data-time="1500">25 Min Work</button>
+                        <button class="btn btn-glass" data-time="300">5 Min Break</button>
+                        <button class="btn btn-glass" data-time="900">15 Min Break</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- TAB 4: GIT & GITHUB GUIDE -->
+            <section class="tab-content" id="git-guide-tab">
+                <div class="glass-card section-card">
+                    <h2>🐙 Professional Git & GitHub Command Guide</h2>
+                    <p>Your cheat-sheet for mastering version control in AntiGravity IDE</p>
+                    
+                    <div class="guide-grid">
+                        <div class="guide-card">
+                            <h3>1. Initialize Local Project</h3>
+                            <pre><code>git init
+git branch -M main</code></pre>
+                            <p>Transforms your folder into a Git repository and sets `main` as the default branch.</p>
+                        </div>
+
+                        <div class="guide-card">
+                            <h3>2. Track & Commit Changes</h3>
+                            <pre><code>git status
+git add .
+git commit -m "feat: add interactive focus timer"</code></pre>
+                            <p>Stages changed files and saves an atomic snapshot with a clear description.</p>
+                        </div>
+
+                        <div class="guide-card">
+                            <h3>3. Connect to GitHub</h3>
+                            <pre><code>git remote add origin https://github.com/USERNAME/REPO.git
+git push -u origin main</code></pre>
+                            <p>Links your computer to your online GitHub repository and uploads your commits.</p>
+                        </div>
+
+                        <div class="guide-card">
+                            <h3>4. Feature Branch Workflow</h3>
+                            <pre><code>git checkout -b feature/new-widget
+# ... make changes ...
+git commit -m "feat: add weather widget"
+git push -u origin feature/new-widget</code></pre>
+                            <p>How professional teams build features without risking the main production code!</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Quick Task Modal -->
+    <div class="modal-backdrop" id="task-modal">
+        <div class="glass-card modal-content">
+            <h3>+ Create Quick Task</h3>
+            <input type="text" id="modal-task-input" placeholder="Task title..." class="modal-input">
+            <div class="modal-actions">
+                <button class="btn btn-secondary" id="modal-cancel-btn">Cancel</button>
+                <button class="btn btn-primary" id="modal-save-btn">Save Task</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
