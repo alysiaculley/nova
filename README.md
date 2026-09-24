@@ -1,6 +1,6 @@
-# 🌌 NovaSpace - Interactive Developer Dashboard & Web Studio
+# ✨ Nova - Interactive Developer Dashboard & Web Studio
 
-Welcome to **NovaSpace**, an interactive, modern web application built with HTML5, CSS3, and JavaScript ES6+. 
+Welcome to **Nova**, an interactive, modern web application built with HTML5, CSS3, and JavaScript ES6+. 
 
 This project was built as part of mastering **AntiGravity IDE**, **Git**, and **GitHub** professional development workflows.
 
@@ -23,7 +23,7 @@ This project was built as part of mastering **AntiGravity IDE**, **Git**, and **
 ### Local Setup
 1. Clone this repository:
    ```bash
-   git clone https://github.com/YOUR_USERNAME/interactive-web-app.git
+   git clone https://github.com/YOUR_USERNAME/nova.git
    ```
 2. Open `index.html` in your web browser or use Live Server in AntiGravity IDE.
 
