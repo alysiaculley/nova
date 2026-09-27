@@ -1,4 +1,4 @@
-# ✨ Nova - Interactive Developer Dashboard & Web Studio
+#  Nova - Interactive Developer Dashboard & Web Studio
 
 Welcome to **Nova**, an interactive, modern web application built with HTML5, CSS3, and JavaScript ES6+. 
 
@@ -10,15 +10,15 @@ This project was built as part of mastering **AntiGravity IDE**, **Git**, and **
 
 - **Modern Glassmorphic UI**: Sleek dark aesthetics with vibrant gradients and subtle glow effects.
 - **Interactive Productivity Suite**:
-  - 📝 **Focus Kanban / Task Tracker**: Add, categorize, filter, and track tasks dynamically.
-  - ⏱️ **Pomodoro & Flow Timer**: Interactive countdown timer with customizable session lengths.
-  - 📊 **Activity & Code Stats**: Real-time visualization of developer metrics.
+  -  **Focus Kanban / Task Tracker**: Add, categorize, filter, and track tasks dynamically.
+  -  **Pomodoro & Flow Timer**: Interactive countdown timer with customizable session lengths.
+  -  **Activity & Code Stats**: Real-time visualization of developer metrics.
 - **Responsive Layout**: Designed to look stunning on desktop, tablet, and mobile screens.
 - **Pure Web Tech**: Built using semantic HTML5, modern CSS variables, animations, and clean modular JavaScript.
 
 ---
 
-## 🛠️ Getting Started
+##  Getting Started
 
 ### Local Setup
 1. Clone this repository:
@@ -29,7 +29,7 @@ This project was built as part of mastering **AntiGravity IDE**, **Git**, and **
 
 ---
 
-## 📜 Professional Git & GitHub Workflow Used
+##  Professional Git & GitHub Workflow Used
 
 1. Initialized local repository with `git init`.
 2. Structured project with standard `.gitignore` and comprehensive `README.md`.
