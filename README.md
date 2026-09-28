@@ -1,4 +1,4 @@
-#  Nova - Interactive Developer Dashboard & Web Studio
+#  Nova - Dashboard 
 
 Welcome to **Nova**, an interactive, modern web application built with HTML5, CSS3, and JavaScript ES6+. 
 
@@ -6,7 +6,7 @@ This project was built as part of mastering **AntiGravity IDE**, **Git**, and **
 
 ---
 
-## ✦ Key Features
+## Key Features
 
 - **Modern Glassmorphic UI**: Sleek dark aesthetics with vibrant gradients and subtle glow effects.
 - **Interactive Productivity Suite**:
